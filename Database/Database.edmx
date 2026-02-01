@@ -1,0 +1,1297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище DatabaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BillOfMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecificationId" Type="bigint" Nullable="false" />
+          <Property Name="MaterialId" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeePositionId" Type="bigint" Nullable="false" />
+          <Property Name="DepartmentId" Type="bigint" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="SalaryRate" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeePosition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="InventaryNum" />
+          </Key>
+          <Property Name="InventaryNum" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EquipmentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitOfMeasurementId" Type="bigint" Nullable="false" />
+          <Property Name="MinRemains" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaterialRemains">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaterialId" Type="bigint" Nullable="false" />
+          <Property Name="Remains" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfBegin" Type="date" Nullable="false" />
+          <Property Name="DateOfEnd" Type="date" />
+          <Property Name="OrderStatus" Type="bigint" Nullable="false" />
+          <Property Name="ClientId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderAssignment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="bigint" Nullable="false" />
+          <Property Name="EquipmentInventaryNum" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ProductionOrderId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Articul" />
+          </Key>
+          <Property Name="Articul" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecificationId" Type="bigint" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductionOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="bigint" Nullable="false" />
+          <Property Name="ProductionArticul" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfPurchase" Type="date" />
+          <Property Name="Amount" Type="real" />
+        </EntityType>
+        <EntityType Name="Specification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupplierPurchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierId" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseId" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="real" Nullable="false" />
+          <Property Name="MaterialId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UnitOfMeasurement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BillOfMaterials_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BillOfMaterials" Type="Self.BillOfMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillOfMaterials">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillOfMaterials_Specification">
+          <End Role="Specification" Type="Self.Specification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BillOfMaterials" Type="Self.BillOfMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillOfMaterials">
+              <PropertyRef Name="SpecificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeePosition">
+          <End Role="EmployeePosition" Type="Self.EmployeePosition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePosition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeePositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_EquipmentStatus">
+          <End Role="EquipmentStatus" Type="Self.EquipmentStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_UnitOfMeasurement">
+          <End Role="UnitOfMeasurement" Type="Self.UnitOfMeasurement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Material" Type="Self.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasurement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Material">
+              <PropertyRef Name="UnitOfMeasurementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialRemains_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MaterialRemains" Type="Self.MaterialRemains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialRemains">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderStatus1">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAssignment_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderAssignment" Type="Self.OrderAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderAssignment">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAssignment_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderAssignment" Type="Self.OrderAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="InventaryNum" />
+            </Principal>
+            <Dependent Role="OrderAssignment">
+              <PropertyRef Name="EquipmentInventaryNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAssignment_ProductionOrder">
+          <End Role="ProductionOrder" Type="Self.ProductionOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderAssignment" Type="Self.OrderAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductionOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderAssignment">
+              <PropertyRef Name="ProductionOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Specification">
+          <End Role="Specification" Type="Self.Specification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SpecificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductionOrder" Type="Self.ProductionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductionOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionOrder_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductionOrder" Type="Self.ProductionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="ProductionOrder">
+              <PropertyRef Name="ProductionArticul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierPurchase_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierPurchase" Type="Self.SupplierPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPurchase">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierPurchase_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierPurchase" Type="Self.SupplierPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPurchase">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierPurchase_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierPurchase" Type="Self.SupplierPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPurchase">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище DatabaseModelContainer">
+          <EntitySet Name="BillOfMaterials" EntityType="Self.BillOfMaterials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeePosition" EntityType="Self.EmployeePosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EquipmentStatus" EntityType="Self.EquipmentStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialRemains" EntityType="Self.MaterialRemains" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderAssignment" EntityType="Self.OrderAssignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductionOrder" EntityType="Self.ProductionOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specification" EntityType="Self.Specification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierPurchase" EntityType="Self.SupplierPurchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitOfMeasurement" EntityType="Self.UnitOfMeasurement" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BillOfMaterials_Material" Association="Self.FK_BillOfMaterials_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="BillOfMaterials" EntitySet="BillOfMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillOfMaterials_Specification" Association="Self.FK_BillOfMaterials_Specification">
+            <End Role="Specification" EntitySet="Specification" />
+            <End Role="BillOfMaterials" EntitySet="BillOfMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeePosition" Association="Self.FK_Employee_EmployeePosition">
+            <End Role="EmployeePosition" EntitySet="EmployeePosition" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_EquipmentStatus" Association="Self.FK_Equipment_EquipmentStatus">
+            <End Role="EquipmentStatus" EntitySet="EquipmentStatus" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_UnitOfMeasurement" Association="Self.FK_Material_UnitOfMeasurement">
+            <End Role="UnitOfMeasurement" EntitySet="UnitOfMeasurement" />
+            <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialRemains_Material" Association="Self.FK_MaterialRemains_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialRemains" EntitySet="MaterialRemains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus1" Association="Self.FK_Order_OrderStatus1">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAssignment_Employee" Association="Self.FK_OrderAssignment_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderAssignment" EntitySet="OrderAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAssignment_Equipment" Association="Self.FK_OrderAssignment_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="OrderAssignment" EntitySet="OrderAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAssignment_ProductionOrder" Association="Self.FK_OrderAssignment_ProductionOrder">
+            <End Role="ProductionOrder" EntitySet="ProductionOrder" />
+            <End Role="OrderAssignment" EntitySet="OrderAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Specification" Association="Self.FK_Product_Specification">
+            <End Role="Specification" EntitySet="Specification" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionOrder_Order" Association="Self.FK_ProductionOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ProductionOrder" EntitySet="ProductionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionOrder_Product" Association="Self.FK_ProductionOrder_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductionOrder" EntitySet="ProductionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierPurchase_Material" Association="Self.FK_SupplierPurchase_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="SupplierPurchase" EntitySet="SupplierPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierPurchase_Purchase" Association="Self.FK_SupplierPurchase_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="SupplierPurchase" EntitySet="SupplierPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierPurchase_Supplier" Association="Self.FK_SupplierPurchase_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplierPurchase" EntitySet="SupplierPurchase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BillOfMaterials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecificationId" Type="Int64" Nullable="false" />
+          <Property Name="MaterialId" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_BillOfMaterials_Material" FromRole="BillOfMaterials" ToRole="Material" />
+          <NavigationProperty Name="Specification" Relationship="Self.FK_BillOfMaterials_Specification" FromRole="BillOfMaterials" ToRole="Specification" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Client" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeePositionId" Type="Int64" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int64" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SalaryRate" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="EmployeePosition" Relationship="Self.FK_Employee_EmployeePosition" FromRole="Employee" ToRole="EmployeePosition" />
+          <NavigationProperty Name="OrderAssignment" Relationship="Self.FK_OrderAssignment_Employee" FromRole="Employee" ToRole="OrderAssignment" />
+        </EntityType>
+        <EntityType Name="EmployeePosition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_EmployeePosition" FromRole="EmployeePosition" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="InventaryNum" />
+          </Key>
+          <Property Name="InventaryNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EquipmentStatus" Relationship="Self.FK_Equipment_EquipmentStatus" FromRole="Equipment" ToRole="EquipmentStatus" />
+          <NavigationProperty Name="OrderAssignment" Relationship="Self.FK_OrderAssignment_Equipment" FromRole="Equipment" ToRole="OrderAssignment" />
+        </EntityType>
+        <EntityType Name="EquipmentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK_Equipment_EquipmentStatus" FromRole="EquipmentStatus" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UnitOfMeasurementId" Type="Int64" Nullable="false" />
+          <Property Name="MinRemains" Type="Single" Nullable="false" />
+          <NavigationProperty Name="BillOfMaterials" Relationship="Self.FK_BillOfMaterials_Material" FromRole="Material" ToRole="BillOfMaterials" />
+          <NavigationProperty Name="UnitOfMeasurement" Relationship="Self.FK_Material_UnitOfMeasurement" FromRole="Material" ToRole="UnitOfMeasurement" />
+          <NavigationProperty Name="MaterialRemains" Relationship="Self.FK_MaterialRemains_Material" FromRole="Material" ToRole="MaterialRemains" />
+          <NavigationProperty Name="SupplierPurchase" Relationship="Self.FK_SupplierPurchase_Material" FromRole="Material" ToRole="SupplierPurchase" />
+        </EntityType>
+        <EntityType Name="MaterialRemains">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialId" Type="Int64" Nullable="false" />
+          <Property Name="Remains" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_MaterialRemains_Material" FromRole="MaterialRemains" ToRole="Material" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfBegin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfEnd" Type="DateTime" Precision="0" />
+          <Property Name="OrderStatus" Type="Int64" Nullable="false" />
+          <Property Name="ClientId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Order_Client" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="OrderStatus1" Relationship="Self.FK_Order_OrderStatus1" FromRole="Order" ToRole="OrderStatus" />
+          <NavigationProperty Name="ProductionOrder" Relationship="Self.FK_ProductionOrder_Order" FromRole="Order" ToRole="ProductionOrder" />
+        </EntityType>
+        <EntityType Name="OrderAssignment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int64" Nullable="false" />
+          <Property Name="EquipmentInventaryNum" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductionOrderId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_OrderAssignment_Employee" FromRole="OrderAssignment" ToRole="Employee" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK_OrderAssignment_Equipment" FromRole="OrderAssignment" ToRole="Equipment" />
+          <NavigationProperty Name="ProductionOrder" Relationship="Self.FK_OrderAssignment_ProductionOrder" FromRole="OrderAssignment" ToRole="ProductionOrder" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_OrderStatus1" FromRole="OrderStatus" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Articul" />
+          </Key>
+          <Property Name="Articul" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecificationId" Type="Int64" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Specification" Relationship="Self.FK_Product_Specification" FromRole="Product" ToRole="Specification" />
+          <NavigationProperty Name="ProductionOrder" Relationship="Self.FK_ProductionOrder_Product" FromRole="Product" ToRole="ProductionOrder" />
+        </EntityType>
+        <EntityType Name="ProductionOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int64" Nullable="false" />
+          <Property Name="ProductionArticul" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Single" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_ProductionOrder_Order" FromRole="ProductionOrder" ToRole="Order" />
+          <NavigationProperty Name="OrderAssignment" Relationship="Self.FK_OrderAssignment_ProductionOrder" FromRole="ProductionOrder" ToRole="OrderAssignment" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductionOrder_Product" FromRole="ProductionOrder" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfPurchase" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Single" />
+          <NavigationProperty Name="SupplierPurchase" Relationship="Self.FK_SupplierPurchase_Purchase" FromRole="Purchase" ToRole="SupplierPurchase" />
+        </EntityType>
+        <EntityType Name="Specification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BillOfMaterials" Relationship="Self.FK_BillOfMaterials_Specification" FromRole="Specification" ToRole="BillOfMaterials" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Specification" FromRole="Specification" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SupplierPurchase" Relationship="Self.FK_SupplierPurchase_Supplier" FromRole="Supplier" ToRole="SupplierPurchase" />
+        </EntityType>
+        <EntityType Name="SupplierPurchase">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierId" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseId" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Single" Nullable="false" />
+          <Property Name="MaterialId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_SupplierPurchase_Material" FromRole="SupplierPurchase" ToRole="Material" />
+          <NavigationProperty Name="Purchase" Relationship="Self.FK_SupplierPurchase_Purchase" FromRole="SupplierPurchase" ToRole="Purchase" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_SupplierPurchase_Supplier" FromRole="SupplierPurchase" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="UnitOfMeasurement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Material" Relationship="Self.FK_Material_UnitOfMeasurement" FromRole="UnitOfMeasurement" ToRole="Material" />
+        </EntityType>
+        <Association Name="FK_BillOfMaterials_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BillOfMaterials" Type="Self.BillOfMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillOfMaterials">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillOfMaterials_Specification">
+          <End Role="Specification" Type="Self.Specification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BillOfMaterials" Type="Self.BillOfMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BillOfMaterials">
+              <PropertyRef Name="SpecificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_EmployeePosition">
+          <End Role="EmployeePosition" Type="Self.EmployeePosition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePosition">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="EmployeePositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAssignment_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderAssignment" Type="Self.OrderAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderAssignment">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Equipment_EquipmentStatus">
+          <End Role="EquipmentStatus" Type="Self.EquipmentStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EquipmentStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Equipment">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAssignment_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderAssignment" Type="Self.OrderAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="InventaryNum" />
+            </Principal>
+            <Dependent Role="OrderAssignment">
+              <PropertyRef Name="EquipmentInventaryNum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Material_UnitOfMeasurement">
+          <End Role="UnitOfMeasurement" Type="Self.UnitOfMeasurement" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Material" Type="Self.Material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasurement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Material">
+              <PropertyRef Name="UnitOfMeasurementId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialRemains_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MaterialRemains" Type="Self.MaterialRemains" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaterialRemains">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierPurchase_Material">
+          <End Role="Material" Type="Self.Material" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierPurchase" Type="Self.SupplierPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPurchase">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderStatus1">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductionOrder" Type="Self.ProductionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductionOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderAssignment_ProductionOrder">
+          <End Role="ProductionOrder" Type="Self.ProductionOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrderAssignment" Type="Self.OrderAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductionOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderAssignment">
+              <PropertyRef Name="ProductionOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Specification">
+          <End Role="Specification" Type="Self.Specification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SpecificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductionOrder_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductionOrder" Type="Self.ProductionOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Articul" />
+            </Principal>
+            <Dependent Role="ProductionOrder">
+              <PropertyRef Name="ProductionArticul" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierPurchase_Purchase">
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierPurchase" Type="Self.SupplierPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purchase">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPurchase">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierPurchase_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SupplierPurchase" Type="Self.SupplierPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SupplierPurchase">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BillOfMaterials" EntityType="Self.BillOfMaterials" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeePosition" EntityType="Self.EmployeePosition" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="EquipmentStatus" EntityType="Self.EquipmentStatus" />
+          <EntitySet Name="Material" EntityType="Self.Material" />
+          <EntitySet Name="MaterialRemains" EntityType="Self.MaterialRemains" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderAssignment" EntityType="Self.OrderAssignment" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ProductionOrder" EntityType="Self.ProductionOrder" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" />
+          <EntitySet Name="Specification" EntityType="Self.Specification" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" />
+          <EntitySet Name="SupplierPurchase" EntityType="Self.SupplierPurchase" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="UnitOfMeasurement" EntityType="Self.UnitOfMeasurement" />
+          <AssociationSet Name="FK_BillOfMaterials_Material" Association="Self.FK_BillOfMaterials_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="BillOfMaterials" EntitySet="BillOfMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillOfMaterials_Specification" Association="Self.FK_BillOfMaterials_Specification">
+            <End Role="Specification" EntitySet="Specification" />
+            <End Role="BillOfMaterials" EntitySet="BillOfMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_EmployeePosition" Association="Self.FK_Employee_EmployeePosition">
+            <End Role="EmployeePosition" EntitySet="EmployeePosition" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAssignment_Employee" Association="Self.FK_OrderAssignment_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderAssignment" EntitySet="OrderAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Equipment_EquipmentStatus" Association="Self.FK_Equipment_EquipmentStatus">
+            <End Role="EquipmentStatus" EntitySet="EquipmentStatus" />
+            <End Role="Equipment" EntitySet="Equipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAssignment_Equipment" Association="Self.FK_OrderAssignment_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="OrderAssignment" EntitySet="OrderAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Material_UnitOfMeasurement" Association="Self.FK_Material_UnitOfMeasurement">
+            <End Role="UnitOfMeasurement" EntitySet="UnitOfMeasurement" />
+            <End Role="Material" EntitySet="Material" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialRemains_Material" Association="Self.FK_MaterialRemains_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="MaterialRemains" EntitySet="MaterialRemains" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierPurchase_Material" Association="Self.FK_SupplierPurchase_Material">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="SupplierPurchase" EntitySet="SupplierPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderStatus1" Association="Self.FK_Order_OrderStatus1">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionOrder_Order" Association="Self.FK_ProductionOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="ProductionOrder" EntitySet="ProductionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderAssignment_ProductionOrder" Association="Self.FK_OrderAssignment_ProductionOrder">
+            <End Role="ProductionOrder" EntitySet="ProductionOrder" />
+            <End Role="OrderAssignment" EntitySet="OrderAssignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Specification" Association="Self.FK_Product_Specification">
+            <End Role="Specification" EntitySet="Specification" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductionOrder_Product" Association="Self.FK_ProductionOrder_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductionOrder" EntitySet="ProductionOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierPurchase_Purchase" Association="Self.FK_SupplierPurchase_Purchase">
+            <End Role="Purchase" EntitySet="Purchase" />
+            <End Role="SupplierPurchase" EntitySet="SupplierPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierPurchase_Supplier" Association="Self.FK_SupplierPurchase_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplierPurchase" EntitySet="SupplierPurchase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище DatabaseModelContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="BillOfMaterials">
+            <EntityTypeMapping TypeName="DatabaseModel.BillOfMaterials">
+              <MappingFragment StoreEntitySet="BillOfMaterials">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SpecificationId" ColumnName="SpecificationId" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="DatabaseModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="DatabaseModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="DatabaseModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeePositionId" ColumnName="EmployeePositionId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="SalaryRate" ColumnName="SalaryRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePosition">
+            <EntityTypeMapping TypeName="DatabaseModel.EmployeePosition">
+              <MappingFragment StoreEntitySet="EmployeePosition">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="DatabaseModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="InventaryNum" ColumnName="InventaryNum" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EquipmentStatus">
+            <EntityTypeMapping TypeName="DatabaseModel.EquipmentStatus">
+              <MappingFragment StoreEntitySet="EquipmentStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Material">
+            <EntityTypeMapping TypeName="DatabaseModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UnitOfMeasurementId" ColumnName="UnitOfMeasurementId" />
+                <ScalarProperty Name="MinRemains" ColumnName="MinRemains" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialRemains">
+            <EntityTypeMapping TypeName="DatabaseModel.MaterialRemains">
+              <MappingFragment StoreEntitySet="MaterialRemains">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+                <ScalarProperty Name="Remains" ColumnName="Remains" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="DatabaseModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateOfBegin" ColumnName="DateOfBegin" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderAssignment">
+            <EntityTypeMapping TypeName="DatabaseModel.OrderAssignment">
+              <MappingFragment StoreEntitySet="OrderAssignment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="EquipmentInventaryNum" ColumnName="EquipmentInventaryNum" />
+                <ScalarProperty Name="ProductionOrderId" ColumnName="ProductionOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="DatabaseModel.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="DatabaseModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Articul" ColumnName="Articul" />
+                <ScalarProperty Name="SpecificationId" ColumnName="SpecificationId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductionOrder">
+            <EntityTypeMapping TypeName="DatabaseModel.ProductionOrder">
+              <MappingFragment StoreEntitySet="ProductionOrder">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductionArticul" ColumnName="ProductionArticul" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchase">
+            <EntityTypeMapping TypeName="DatabaseModel.Purchase">
+              <MappingFragment StoreEntitySet="Purchase">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateOfPurchase" ColumnName="DateOfPurchase" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specification">
+            <EntityTypeMapping TypeName="DatabaseModel.Specification">
+              <MappingFragment StoreEntitySet="Specification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supplier">
+            <EntityTypeMapping TypeName="DatabaseModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierPurchase">
+            <EntityTypeMapping TypeName="DatabaseModel.SupplierPurchase">
+              <MappingFragment StoreEntitySet="SupplierPurchase">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DatabaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitOfMeasurement">
+            <EntityTypeMapping TypeName="DatabaseModel.UnitOfMeasurement">
+              <MappingFragment StoreEntitySet="UnitOfMeasurement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
