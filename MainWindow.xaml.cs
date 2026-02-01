@@ -24,5 +24,28 @@ namespace ViPKS_PR10_FirstTry
         {
             InitializeComponent();
         }
+
+        private void framePageContent_ContentRendered(object sender, EventArgs e)
+        {
+            if (framePageContent.CanGoBack)
+            {
+                btnBack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnBack.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (!framePageContent.CanGoBack) {
+                framePageContent.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("Невозможно вернуться назад, так как это самая первая посещённая страница");
+            }
+        }
     }
 }

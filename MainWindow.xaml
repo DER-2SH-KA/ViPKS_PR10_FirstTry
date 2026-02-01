@@ -5,8 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViPKS_PR10_FirstTry"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="720" Width="1280">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         
+        <StackPanel Grid.Row="0"  Orientation="Horizontal" Background="Red">
+            <Button x:Name="btnBack" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnBack_Click" />
+        </StackPanel>
+
+        <Frame x:Name="framePageContent" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="framePageContent_ContentRendered" />
     </Grid>
 </Window>
