@@ -24,5 +24,35 @@ namespace ViPKS_PR10_FirstTry.Pages
         {
             InitializeComponent();
         }
+
+        private void btnGoToEmployeesPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new EmplyeesPage());
+        }
+
+        private void btnGoToEquipmentsPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new EquipmentsPage());
+        }
+
+        private void btnGoToMaterialsPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new MaterialsPage());
+        }
+
+        private void btnGoToOrderAssignmentsPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new OrderAssignmentsPage());
+        }
+
+        private void btnGoToOrdersPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new OrdersPage());
+        }
+
+        private void btnGoToProductsPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ProductsPage());
+        }
     }
 }

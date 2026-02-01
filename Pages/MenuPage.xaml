@@ -9,6 +9,19 @@
       Title="MenuPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         
+        <TextBlock Grid.Row="0" Text="Меню" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" FontWeight="Medium" />
+        <WrapPanel Grid.Row="1" Orientation="Horizontal">
+            <Button x:Name="btnGoToEmployeesPage" Content="Сотрудники" Margin="5" Click="btnGoToEmployeesPage_Click" />
+            <Button x:Name="btnGoToEquipmentsPage" Content="Оборудование" Margin="5" Click="btnGoToEquipmentsPage_Click" />
+            <Button x:Name="btnGoToMaterialsPage" Content="Материалы" Margin="5" Click="btnGoToMaterialsPage_Click" />
+            <Button x:Name="btnGoToOrderAssignmentsPage" Content="Назначения на заказы" Margin="5" Width="Auto" Click="btnGoToOrderAssignmentsPage_Click" />
+            <Button x:Name="btnGoToOrdersPage" Content="Заказы" Margin="5" Click="btnGoToOrdersPage_Click" />
+            <Button x:Name="btnGoToProductsPage" Content="Продукты" Margin="5" Click="btnGoToProductsPage_Click" />
+        </WrapPanel>
     </Grid>
 </Page>

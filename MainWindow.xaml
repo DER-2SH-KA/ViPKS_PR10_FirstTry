@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         
         <StackPanel Grid.Row="0"  Orientation="Horizontal" Background="Red">
-            <Button x:Name="btnBack" HorizontalAlignment="Right" VerticalAlignment="Center" Click="btnBack_Click" />
+            <Button x:Name="btnBack" Content="Назад" VerticalAlignment="Center" Visibility="Collapsed" Click="btnBack_Click" />
         </StackPanel>
 
         <Frame x:Name="framePageContent" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="framePageContent_ContentRendered" />

@@ -23,6 +23,8 @@ namespace ViPKS_PR10_FirstTry
         public MainWindow()
         {
             InitializeComponent();
+
+            this.framePageContent.Navigate(new Pages.MenuPage());
         }
 
         private void framePageContent_ContentRendered(object sender, EventArgs e)
@@ -39,13 +41,7 @@ namespace ViPKS_PR10_FirstTry
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            if (!framePageContent.CanGoBack) {
-                framePageContent.GoBack();
-            }
-            else
-            {
-                MessageBox.Show("Невозможно вернуться назад, так как это самая первая посещённая страница");
-            }
+            framePageContent.GoBack();
         }
     }
 }
