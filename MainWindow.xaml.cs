@@ -24,10 +24,10 @@ namespace ViPKS_PR10_FirstTry
         {
             InitializeComponent();
 
-            this.framePageContent.Navigate(new Pages.MenuPage());
+            //this.framePageContent.Navigate(new Pages.MenuPage());
         }
 
-        private void framePageContent_ContentRendered(object sender, EventArgs e)
+        /*private void framePageContent_ContentRendered(object sender, EventArgs e)
         {
             if (framePageContent.CanGoBack)
             {
@@ -42,6 +42,6 @@ namespace ViPKS_PR10_FirstTry
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             framePageContent.GoBack();
-        }
+        }*/
     }
 }
