@@ -26,21 +26,27 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <!-- Список -->
                         <ColumnDefinition Width="300" />
-                        <!-- Форма CRUD -->
                     </Grid.ColumnDefinitions>
                     
                     <Grid Grid.Column="0" Margin="10">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Справочник материалов" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
-                        <DataGrid Grid.Row="1" x:Name="MaterialsGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="0,0,0,20">
+                        <TextBlock Grid.Row="0" Text="Справочник материалов" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                        
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+                            <Button x:Name="btnCreateMaterial" Content="Создать" Click="AddMaterial_Click" Width="100" Margin="0,0,5,0"/>
+                            <Button x:Name="btnDeleteMaterial" Content="Удалить" Click="btnDeleteMaterial_Click" Width="100" />
+                        </StackPanel>
+
+                        <DataGrid Grid.Row="2" x:Name="MaterialsGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" Margin="0,0,0,20" SelectionChanged="MaterialsGrid_SelectionChanged">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Наименование" Binding="{Binding Title}" Width="*"/>
                                 <DataGridTextColumn Header="Ед. изм." Binding="{Binding UnitOfMeasurement.Title}" Width="100"/>
@@ -48,8 +54,14 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <TextBlock Grid.Row="2" Text="Справочник готовой продукции (Артикулы)" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
-                        <DataGrid Grid.Row="3" x:Name="ProductsGrid" AutoGenerateColumns="False" CanUserAddRows="False">
+                        <TextBlock Grid.Row="3" Text="Справочник готовой продукции (Артикулы)" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+
+                        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="0,0,0,10">
+                            <Button x:Name="btnCreateProduct" Content="Создать" Click="AddProduct_Click" Width="100" Margin="0,0,5,0"/>
+                            <Button x:Name="btnDeleteProduct" Content="Удалить" Click="btnDeleteProduct_Click" Width="100" />
+                        </StackPanel>
+
+                        <DataGrid Grid.Row="5" x:Name="ProductsGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectionChanged="ProductsGrid_SelectionChanged">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Артикул" Binding="{Binding Articul}" Width="100"/>
                                 <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
@@ -59,8 +71,8 @@
                         </DataGrid>
                     </Grid>
 
-                    <Border Grid.Column="1" Background="#EFEFEF" CornerRadius="5" Padding="15">
-                        <StackPanel x:Name="MaterialEditForm" Visibility="Collapsed">
+                    <Border x:Name="MaterialEditForm" Visibility="Collapsed" Grid.Column="1" Background="#EFEFEF" CornerRadius="5" Padding="15">
+                        <StackPanel>
                             <TextBlock Text="Редактирование материала" FontWeight="Bold" Margin="0,0,0,15"/>
 
                             <TextBlock Text="Наименование:"/>
@@ -72,13 +84,12 @@
                             <TextBlock Text="Мин. остаток:"/>
                             <TextBox x:Name="TxtMatMinRemains" Margin="0,5,0,10"/>
 
-                            <Button x:Name="btnSaveMaterial" Content="Сохранить" Margin="0,10,0,0" Height="30" Background="#2196F3" Foreground="White"/>
-                            <Button x:Name="btnCancelEditingMaterial" Content="Отмена" Margin="0,5,0,0" Background="Transparent" BorderBrush="Gray"/>
+                            <Button x:Name="btnSaveMaterial" Content="Сохранить" Click="btnSaveMaterial_Click" Margin="0,10,0,0" Height="30" Background="#2196F3" Foreground="White"/>
                         </StackPanel>
                     </Border>
 
-                    <Border Grid.Column="1" Background="#EFEFEF" CornerRadius="5" Padding="15">
-                        <StackPanel x:Name="ProductEditForm" Visibility="Collapsed">
+                    <Border x:Name="ProductEditForm" Visibility="Collapsed" Grid.Column="1" Background="#EFEFEF" CornerRadius="5" Padding="15">
+                        <StackPanel>
                             <TextBlock Text="Редактирование продукта" FontWeight="Bold" Margin="0,0,0,15"/>
 
                             <TextBlock Text="Наименование:"/>
@@ -88,10 +99,9 @@
                             <TextBox x:Name="TxtProdDescription" Margin="0,5,0,10"/>
 
                             <TextBlock Text="Спецификация:"/>
-                            <ComboBox x:Name="TxtProdSpecification" DisplayMemberPath="Title" Margin="0,5,0,10"/>
+                            <ComboBox x:Name="ComboBoxSpecification" DisplayMemberPath="Title" Margin="0,5,0,10"/>
 
-                            <Button x:Name="btnSaveProduct" Content="Сохранить" Margin="0,10,0,0" Height="30" Background="#2196F3" Foreground="White"/>
-                            <Button x:Name="btnCancelEditingProduct" Content="Отмена" Margin="0,5,0,0" Background="Transparent" BorderBrush="Gray"/>
+                            <Button x:Name="btnSaveProduct" Content="Сохранить" Click="btnSaveProduct_Click" Margin="0,10,0,0" Height="30" Background="#2196F3" Foreground="White"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -107,10 +117,10 @@
 
                     <DockPanel Grid.Column="0" Margin="0,0,5,0">
                         <TextBlock DockPanel.Dock="Top" Text="Приход материалов" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
-                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                        <!--<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
                             <Button Content="Добавить поставку" Padding="10,5"/>
-                        </StackPanel>
-                        <DataGrid x:Name="PurchasesGrid" AutoGenerateColumns="False">
+                        </StackPanel>-->
+                        <DataGrid x:Name="PurchasesGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Дата" Binding="{Binding Purchase.DateOfPurchase, StringFormat=d}" Width="Auto"/>
                                 <DataGridTextColumn Header="Материал" Binding="{Binding Material.Title}" Width="*"/>
@@ -122,7 +132,7 @@
 
                     <DockPanel Grid.Column="1" Margin="5,0,0,0">
                         <TextBlock DockPanel.Dock="Top" Text="Остатки на складе" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
-                        <DataGrid x:Name="RemainsGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid x:Name="RemainsGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Материал" Binding="{Binding Material.Title}" Width="*"/>
                                 <DataGridTextColumn Header="Текущий остаток" Binding="{Binding Remains}" Width="*"/>
@@ -137,9 +147,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
-                        <!-- Список -->
                         <ColumnDefinition Width="300" />
-                        <!-- Форма CRUD -->
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0" Margin="10">
@@ -150,53 +158,39 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                            <Button Content="Создать новый заказ" Padding="15,5" Background="#007ACC" Foreground="White" BorderThickness="0" Width="Auto"/>
-                            <Button Content="Рассчитать материалы" Margin="10,0" Padding="15,5" Width="Auto" />
+                            <Button Content="Создать" Click="AddProductionOrder_Click" Padding="15,5" BorderThickness="0" Width="Auto"/>
+                            <Button Content="Удалить" Click="btnDeleteProductionOrder_Click" Margin="10,0" Padding="15,5" Width="Auto" />
                         </StackPanel>
 
-                        <DataGrid Grid.Row="1" x:Name="OrdersGrid" AutoGenerateColumns="False">
+                        <DataGrid Grid.Row="1" x:Name="OrdersGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectionChanged="OrdersGrid_SelectionChanged">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                                <DataGridTextColumn Header="Клиент" Binding="{Binding Client.LastName}" Width="150"/>
-                                <DataGridTextColumn Header="Дата начала" Binding="{Binding DateOfBegin, StringFormat=d}" Width="100"/>
-                                <DataGridTextColumn Header="Дата окончания" Binding="{Binding DateOfEnd, StringFormat=d}" Width="100"/>
-                                <DataGridTemplateColumn Header="Статус" Width="120">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <!-- Здесь можно привязать цвет к статусу через конвертер -->
-                                            <Border Background="#E1F5FE" CornerRadius="4" Padding="5,2">
-                                                <TextBlock Text="{Binding OrderStatus.Title}" HorizontalAlignment="Center"/>
-                                            </Border>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding Order.Client.LastName}" Width="120"/>
+                                <DataGridTextColumn Header="Продукция" Binding="{Binding Product.Title}" Width="120" />
+                                <DataGridTextColumn Header="Количество" Binding="{Binding Quantity, StringFormat={}{0:f2}}" Width="Auto" />
+                                <DataGridTextColumn Header="Дата начала" Binding="{Binding Order.DateOfBegin, StringFormat=d}" Width="100"/>
+                                <DataGridTextColumn Header="Дата окончания" Binding="{Binding Order.DateOfEnd, StringFormat=d}" Width="100"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding Order.OrderStatus1.Title}"  Width="120" />
                             </DataGrid.Columns>
                         </DataGrid>
 
                         <TextBlock Grid.Row="2" Text="* Для просмотра состава заказа выберите строку" FontStyle="Italic" Foreground="Gray" Margin="0,5"/>
                     </Grid>
 
-                    <Border Grid.Column="1" Background="#EFEFEF" CornerRadius="5" Padding="15">
-                        <StackPanel x:Name="ProductionOrderEditForm" Visibility="Collapsed">
+                    <Border x:Name="ProductionOrderEditForm" Visibility="Collapsed" Grid.Column="1" Background="#EFEFEF" CornerRadius="5" Padding="15">
+                        <StackPanel>
                             <TextBlock Text="Редактирование материала" FontWeight="Bold" Margin="0,0,0,15"/>
 
                             <TextBlock Text="Заказ:"/>
-                            <ComboBox x:Name="ComboBoxProductionOrderOrder" DisplayMemberPath="Title" Margin="0,5,0,10"/>
+                            <ComboBox x:Name="ComboBoxProductionOrderOrder" DisplayMemberPath="Id" Margin="0,5,0,10"/>
 
-                            <TextBlock Text="Клиент:"/>
-                            <ComboBox x:Name="ComboBoxProductionOrderClient" DisplayMemberPath="Title" Margin="0,5,0,10"/>
+                            <TextBlock Text="Продукт:"/>
+                            <ComboBox x:Name="ComboBoxProductionOrderProduct" DisplayMemberPath="Title" Margin="0,5,0,10"/>
 
                             <TextBlock Text="Количесвто:"/>
                             <TextBox x:Name="TxtProductionOrderQuantity" Margin="0,5,0,10"/>
 
-                            <TextBlock Text="Дата начала:"/>
-                            <TextBox x:Name="TxtProductionOrderDateOfBegin" Margin="0,5,0,10"/>
-
-                            <TextBlock Text="Дата окончания:"/>
-                            <TextBox x:Name="TxtProductionOrderDateOfEnd" Margin="0,5,0,10"/>
-
-                            <Button x:Name="btnSaveProductionOrder" Content="Сохранить" Margin="0,10,0,0" Height="30" Background="#2196F3" Foreground="White"/>
-                            <Button x:Name="btnCancelEditingProductionOrder" Content="Отмена" Margin="0,5,0,0" Background="Transparent" BorderBrush="Gray"/>
+                            <Button x:Name="btnSaveProductionOrder" Content="Сохранить" Click="btnSaveProductionOrder_Click" Margin="0,10,0,0" Height="30" Background="#2196F3" Foreground="White"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -212,7 +206,7 @@
 
                     <DockPanel Grid.Row="0">
                         <TextBlock DockPanel.Dock="Top" Text="Сотрудники" />
-                        <DataGrid x:Name="EmployeesGrid" DockPanel.Dock="Bottom" AutoGenerateColumns="False">
+                        <DataGrid x:Name="EmployeesGrid" DockPanel.Dock="Bottom" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="ФИО" Binding="{Binding LastName}" Width="*"/>
                                 <DataGridTextColumn Header="Должность" Binding="{Binding EmployeePosition.Title}" Width="150"/>
@@ -224,19 +218,15 @@
 
                     <DockPanel Grid.Row="1">
                         <TextBlock DockPanel.Dock="Top" Text="Оборудование" />
-                        <DataGrid x:Name="EquipmentGrid" DockPanel.Dock="Bottom"  AutoGenerateColumns="False">
+                        <DataGrid x:Name="EquipmentGrid" DockPanel.Dock="Bottom"  AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Инв. номер" Binding="{Binding InventoryNum}" Width="120"/>
+                                <DataGridTextColumn Header="Инв. номер" Binding="{Binding Path=InventaryNum}" Width="120"/>
                                 <DataGridTextColumn Header="Наименование" Binding="{Binding Title}" Width="*"/>
                                 <DataGridTextColumn Header="Статус" Binding="{Binding EquipmentStatus.Title}" Width="150"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </DockPanel>
                 </Grid>
-            </TabItem>
-
-            <TabItem Header="Расчёты">
-                
             </TabItem>
         </TabControl>
     </Grid>
